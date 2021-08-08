@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="anuncio grey lighten-1 valign-wrapper">
+        <span class="grey-text text-darken-2">
+            ANÚNCIO
+        </span>
+    </div>
+</div>
+
+<h1 class="flow-text">Enquetes mais votadas</h1>
+
+<table class="top-polls">
+    <thead>
+        <tr>
+            <th>Criado em</th>
+            <th>Título</th>
+            <th>Votos</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let poll of topPolls | async">
+            <td>{{ poll.creation.toMillis() | date: 'dd/MM/yyyy hh:mm' }}</td>
+            <td>{{ poll.title }}</td>
+            <td>{{ poll.votes }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h1 class="flow-text">Enquetes recentes</h1>
+
+<table class="recent-polls">
+    <thead>
+        <tr>
+            <th>Criado em</th>
+            <th>Título</th>
+            <th>Votos</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let poll of recentPolls | async ">
+            <td>{{ poll.creation.toMillis() | date: 'dd/MM/yyyy hh:mm'}}</td>
+            <td>{{ poll.title }}</td>
+            <td>{{ poll.votes }}</td>
+        </tr>
+    </tbody>
+</table>

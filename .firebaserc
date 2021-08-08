@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "digi-poll": {
+      "hosting": {
+        "DigiPoll": [
+          "digi-poll"
+        ]
+      }
+    }
+  }
+}
