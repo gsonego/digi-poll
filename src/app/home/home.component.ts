@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 import { Poll } from '../models/poll.model';
+import { PollDataService } from '../services/poll-data-service';
 
 @Component({
   selector: 'app-home',
@@ -11,17 +12,12 @@ import { Poll } from '../models/poll.model';
 })
 export class HomeComponent implements OnInit {
   topPolls: Observable<any>;
-  recentPolls: Observable<any>;  
+  recentPolls: Observable<any>;
 
-  constructor(private firestore: AngularFirestore) {
-    this.topPolls = firestore
-      .collection('polls', ref => ref.orderBy('votes', 'desc').limit(5))
-      .valueChanges();
-
-      this.recentPolls = firestore
-      .collection('polls', ref => ref.orderBy('creation', 'desc').limit(5))
-      .valueChanges(); 
-   }
+  constructor(private pollDataService: PollDataService) {
+    this.topPolls = pollDataService.getTopPolls();
+    this.recentPolls = pollDataService.getRecentPolls();
+  }
 
   ngOnInit(): void {
   }

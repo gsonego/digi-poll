@@ -20,7 +20,7 @@
     <tbody>
         <tr *ngFor="let poll of topPolls | async">
             <td>{{ poll.creation.toMillis() | date: 'dd/MM/yyyy hh:mm' }}</td>
-            <td>{{ poll.title }}</td>
+            <td><a [routerLink]="['/poll', poll.id]">{{ poll.title }}</a></td>
             <td>{{ poll.votes }}</td>
         </tr>
     </tbody>
@@ -40,7 +40,7 @@
     <tbody>
         <tr *ngFor="let poll of recentPolls | async ">
             <td>{{ poll.creation.toMillis() | date: 'dd/MM/yyyy hh:mm'}}</td>
-            <td>{{ poll.title }}</td>
+            <td><a [routerLink]="['/poll', poll.id]">{{ poll.title }}</a></td>
             <td>{{ poll.votes }}</td>
         </tr>
     </tbody>

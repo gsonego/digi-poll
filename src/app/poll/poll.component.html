@@ -1,1 +1,3 @@
-<p>poll works!</p>
+<h2>{{ poll?.title }} </h2>
+<h3>Criado em: {{ poll?.creation.toDate() | date }}</h3>
+<h3>Votos: {{ poll?.votes }}</h3>
