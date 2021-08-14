@@ -1,3 +1,33 @@
-<h2>{{ poll?.title }} </h2>
-<h3>Criado em: {{ poll?.creation.toDate() | date }}</h3>
-<h3>Votos: {{ poll?.votes }}</h3>
+<app-horizontal-banner></app-horizontal-banner>
+
+<div class="poll">
+    <div class="poll-header">
+        <div class="poll-title flow-text black-text">
+            {{ poll?.title }}
+        </div>
+        <div class="poll-creation grey-text">
+            Criado em <span>{{ poll?.creation.toDate() | date:'dd/MM/yyyy' }}</span>
+        </div>
+    </div>
+    <div class="poll-body">
+
+        <div class="poll-option row" *ngFor="let option of poll?.options">
+            <div class="option-value col s6 flow-text">
+                {{ option.value }}
+            </div>
+            <div class="option-perc col s4 flow-text">
+                <div class="option-perc-bar indigo lighten-1" [ngStyle]="{'width.%': option.percentage*100 }"></div>
+                <div class="option-perc-value grey-text text-darken-2">
+                    {{ option.percentage | percent:"1.2-2" }}
+                </div>
+            </div>
+            <div class="option-votes col s2 flow-text light-blue-text text-darken-2">
+                <span>{{ option.votes }}</span>
+            </div>
+        </div>        
+    </div>
+
+    <div class="poll-total flow-text">
+       Total de Votos: <span class="total-votes">{{ poll?.votes }}</span>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+.poll {
+    border: 1px solid #dedede;
+    background-color: #f7f7f7;
+    padding: 10px;
+}
+
+.poll-header {
+    //
+
+    > .poll-title {
+        color: black;
+    }
+}
+
+.poll-body {
+    margin-top: 20px;
+}
+
+.poll-option {
+    margin-top: 10px;
+
+}
+
+.option-perc {
+    display: flex;
+    align-items: center;
+
+    & .option-perc-bar {
+        height: 30px;
+    }
+
+    & .option-perc-value {
+        margin-left: 5px;
+    }
+}
+
+.option-votes {
+    text-align: right;
+
+    > span {
+        border-bottom: 1px dotted;
+    }
+}
+
+.poll-total {
+    margin: 50px 0 20px;
+
+    text-align: center;
+}

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { Poll } from '../models/poll.model';
 import { PollDataService } from '../services/poll-data-service';
 
 @Component({
@@ -13,22 +11,49 @@ export class PollComponent implements OnInit {
   poll: any | undefined;
 
   constructor(private route: ActivatedRoute, private pollDataService: PollDataService) {
-    
   }
 
   ngOnInit(): void {
     // First get the product id from the current route.
     const routeParams = this.route.snapshot.paramMap;
     const pollId = routeParams.get('pollId');
-
     
     this.pollDataService
     .getPoll(pollId || "")
     .subscribe(res => {
-        console.log(res.payload.data());
-
-        this.poll = res.payload.data(); 
+         this.processPollData( res.payload.data() ); 
       });
+  }
+
+  processPollData(pollData: any) {
+    this.poll = {
+      title: pollData.title,
+      creation: pollData.creation,
+      votes: pollData.votes,
+      options: []
+    }
+
+    const options = pollData.options || 0; 
+    const optionList: any[] = [];
+
+    for (let index = 1; index <= options; index++) {
+      const value = pollData[`${index}.option`];
+      const votes = pollData[`${index}.votes`];
+      const percentage = votes / pollData.votes;
+      
+      const option = {
+        index,
+        value,
+        votes,
+        percentage,
+      }
+
+      optionList.push(option);
+    }
+
+    let sortedList = optionList.sort((a, b) => b.votes - a.votes);
+
+    this.poll.options = sortedList;
   }
 
 }
