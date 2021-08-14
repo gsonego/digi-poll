@@ -47,3 +47,4 @@ Thumbs.db
 # Enviroment variables
 environment.ts
 environment.prod.ts
+.env

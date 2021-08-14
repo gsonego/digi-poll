@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "config": "ts-node ./src/assets/scripts/setEnv.ts",
     "start": "ng serve",
-    "serve": "ng serve --watch --open",
+    "serve": "npm run config -- --environment=dev && ng serve --watch --open",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -26,24 +27,27 @@
     "firebase": "^7.0 || ^8.0"
   },
   "devDependencies": {
+    "@angular-devkit/architect": ">= 0.900 < 0.1300",
     "@angular-devkit/build-angular": "~12.1.0",
     "@angular/cli": "~12.1.0",
     "@angular/compiler-cli": "~12.1.0",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
+    "dotenv": "^10.0.0",
+    "firebase-tools": "^8.0.0 || ^9.0.0",
+    "fuzzy": "^0.1.3",
+    "inquirer": "^6.2.2",
+    "inquirer-autocomplete-prompt": "^1.0.1",
     "jasmine-core": "~3.7.0",
+    "jsonc-parser": "^3.0.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "typescript": "~4.3.2",
-    "@angular-devkit/architect": ">= 0.900 < 0.1300",
-    "firebase-tools": "^8.0.0 || ^9.0.0",
-    "fuzzy": "^0.1.3",
-    "inquirer": "^6.2.2",
-    "inquirer-autocomplete-prompt": "^1.0.1",
     "open": "^7.0.3",
-    "jsonc-parser": "^3.0.0"
+    "ts-node": "^10.2.0",
+    "typescript": "~4.3.2",
+    "yargs": "^17.1.1"
   }
 }
