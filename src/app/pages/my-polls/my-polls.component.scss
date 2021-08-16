@@ -1,0 +1,16 @@
+.title {
+    display: flex;
+    align-items: center;
+
+    h1 {
+        flex: 1;
+    }
+}
+
+.edit-item, .delete-item {
+    cursor: pointer;
+}
+
+.edit-item:hover, .delete-item:hover {
+    filter: brightness(0.6);
+}

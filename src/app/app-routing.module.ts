@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { PollComponent } from './poll/poll.component';
-import { UserComponent } from './user/user.component';
+import { MyPollsComponent } from './pages/my-polls/my-polls.component';
+import { AddPollComponent } from './pages/add-poll/add-poll.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
-  { path: "user/:userId", component: UserComponent },
-  { path: "poll/:pollId", component: PollComponent }
+  { path: "poll/:pollId", component: PollComponent },
+  { path: "my-polls", component: MyPollsComponent },
+  { path: "add-poll", component: AddPollComponent }
 ];
 
 @NgModule({

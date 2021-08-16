@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { Poll } from '../models/poll.model';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -19,12 +17,18 @@ export class PollDataService {
   getRecentPolls() {
     return this.firestore
       .collection('polls', ref => ref.orderBy('creation', 'desc').limit(5))
-      .valueChanges()
+      .valueChanges({ idField: 'id' })
   }
 
   getPoll(id: string) {
     return this.firestore
       .doc(`polls/${id}`)
       .snapshotChanges();
+  }
+
+  getPollByUser(userId: string){
+    return this.firestore
+      .collection('polls', ref => ref.where('userId', '==', userId))
+      .valueChanges({ idField: 'id' });
   }
 }

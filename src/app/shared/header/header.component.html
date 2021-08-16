@@ -9,10 +9,13 @@
                 </a>
 
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="#">Privacidade</a></li>
-                    <li><a href="#">Sobre</a></li>
+                    <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['']">Home</a></li>
+                    <li routerLinkActive="active"><a [routerLink]="['my-polls']" *ngIf="isLogged">Minha Conta</a></li>
+                    <li routerLinkActive="active"><a href="#" >Privacidade</a></li>
+                    <li routerLinkActive="active"><a href="#">Sobre</a></li>
                     <li>
-                        <button class="btn blue">Entrar</button>
+                        <button class="btn blue waves-effect" *ngIf="!isLogged" (click)="onLoginClick()">Entrar</button>
+                        <button class="btn red lighten-2 waves-effect" *ngIf="isLogged" (click)="onLogout()">Sair</button>
                     </li>
                 </ul>
             </div>

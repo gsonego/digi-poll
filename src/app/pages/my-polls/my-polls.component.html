@@ -1,0 +1,25 @@
+<div class="title">
+  <h1 class="flow-text">Minhas enquetes</h1>
+  <div class="add-button">
+    <button class="btn-floating waves-effect green" (click)="onAddItemClick()">
+      <i class="material-icons">add</i>
+    </button>
+  </div>
+</div>
+
+<ul class="collection">
+
+  <!-- Pool Item -->
+  <li class="collection-item avatar" *ngFor="let poll of userPolls | async">
+    <i class="material-icons circle indigo">insert_chart</i>
+    <span class="title flow-text">
+      <a [routerLink]="['/poll', poll.id]">{{ poll.title }}</a>
+    </span>
+    <p class="grey-text">Votos: {{ poll.votes }}</p>
+    <span class="secondary-content">
+      <i class="material-icons grey-text edit-item" (click)="onEditItemClick(poll.id)">create</i>
+      <i class="material-icons grey-text delete-item" (click)="onDeleteItemClick(poll.id)">delete</i>
+    </span>
+  </li>
+
+</ul>
