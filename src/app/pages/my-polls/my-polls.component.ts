@@ -24,10 +24,6 @@ export class MyPollsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onAddItemClick() {
-    alert("Add item!");
-  }
-
   onEditItemClick(pollId: string) {
     alert(`Edit item: ${pollId}!!`);
   }

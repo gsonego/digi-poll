@@ -1,1 +1,44 @@
-<p>add-poll works!</p>
+<div class="card">
+    <div class="card-content">
+        <h5 class="card-title">
+            Nova Enquete
+        </h5>
+
+        <div class="col s12">
+            Informe um título para sua nova enquete e digite abaixo as opções válidas para sua pesquisa.
+        </div>
+
+        <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="title" type="text" class="validate" formControlName="title" required>
+                    <label for="title">Título da enquete</label>
+                    <span class="helper-text">Ex: Qual a maior banda de todos os tempos ?</span>
+                </div>
+            </div>
+            
+            <div formArrayName="options">
+                <div class="row" *ngFor="let option of options.controls; let i=index">
+                    <div class="input-field col s11 offset-s1">
+                        <input type="text" class="validate" [formControlName]="i" required>
+                        <label>Opção {{ i + 1}}</label>
+                        <span class="helper-text">Ex: Queen / Beatles / A-ha / N'Sync</span>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="row">
+                <div class="input-field col s12">
+                    <button 
+                        class="btn waves-effect right" 
+                        type="submit" 
+                        name="action"
+                        [disabled]="addForm.invalid">
+                        Gravar
+                    </button>
+                </div>
+            </div>            
+        </form>
+    </div>
+</div>

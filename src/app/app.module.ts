@@ -14,6 +14,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { AngularFireModule } from '@angular/fire'
 import { environment } from 'src/environments/environment';
 import { AddPollComponent } from './pages/add-poll/add-poll.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { AddPollComponent } from './pages/add-poll/add-poll.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],
