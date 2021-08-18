@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PollDataService } from '../services/poll-data-service';
+import { PollDataService } from '../../services/poll-data-service';
 
 @Component({
   selector: 'app-poll',

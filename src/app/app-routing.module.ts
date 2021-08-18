@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
-import { PollComponent } from './poll/poll.component';
+import { HomeComponent } from './pages/home/home.component';
+import { PollComponent } from './pages/poll/poll.component';
 import { MyPollsComponent } from './pages/my-polls/my-polls.component';
 import { AddPollComponent } from './pages/add-poll/add-poll.component';
 

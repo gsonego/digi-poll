@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 
 import { AuthService } from 'src/app/services/auth-service';
 import { PollDataService } from 'src/app/services/poll-data-service';
-import { NewPoll } from './newPoll';
+import { NewPoll } from '../../models/newPoll';
 
 @Component({
   selector: 'app-add-poll',

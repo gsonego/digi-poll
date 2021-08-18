@@ -1,6 +1,6 @@
 export interface Poll {
-    id?: string;
-    creation: string;
     title: string;
+    creation: string;
+    userId: string;
     votes: number;
 }

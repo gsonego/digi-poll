@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
-import { Poll } from '../models/poll.model';
-import { PollDataService } from '../services/poll-data-service';
+import { Poll } from '../../models/poll.model';
+import { PollDataService } from '../../services/poll-data-service';
 
 @Component({
   selector: 'app-home',
