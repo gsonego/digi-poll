@@ -6,7 +6,7 @@
             {{ poll?.title }}
         </div>
         <div class="poll-creation grey-text">
-            Criado em <span>{{ poll?.creation.toDate() | date:'dd/MM/yyyy' }}</span>
+            Criado em <span>{{ poll?.creation | date:'dd/MM/yyyy HH:mm' }}</span>
         </div>
     </div>
     <div class="poll-body">

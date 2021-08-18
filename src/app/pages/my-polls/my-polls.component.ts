@@ -13,10 +13,10 @@ export class MyPollsComponent implements OnInit {
   userPolls: Observable<any> | undefined;
 
   constructor(private pollDataService: PollDataService, private authService: AuthService) {
-    authService.auth.user.subscribe(user => {
+    this.authService.auth.user.subscribe(user => {
       if (user) {
         this.userId = user.uid;
-        this.userPolls = pollDataService.getPollByUser(this.userId);
+        this.userPolls = this.pollDataService.getPollByUser(this.userId);
       }
     });    
    }

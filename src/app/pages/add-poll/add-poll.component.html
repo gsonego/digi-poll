@@ -14,22 +14,35 @@
                 <div class="input-field col s12">
                     <input id="title" type="text" class="validate" formControlName="title" required>
                     <label for="title">Título da enquete</label>
-                    <span class="helper-text">Ex: Qual a maior banda de todos os tempos ?</span>
+                    <span class="helper-text">Ex: Qual a maior banda de Rock de todos os tempos ?</span>
                 </div>
             </div>
             
-            <div formArrayName="options">
-                <div class="row" *ngFor="let option of options.controls; let i=index">
-                    <div class="input-field col s11 offset-s1">
+            <ng-container formArrayName="options">
+                <div class="row option-item" *ngFor="let option of options.controls; let i=index">
+                    <div class="input-field col s10 offset-s1">
                         <input type="text" class="validate" [formControlName]="i" required>
                         <label>Opção {{ i + 1}}</label>
-                        <span class="helper-text">Ex: Queen / Beatles / A-ha / N'Sync</span>
+                        <span class="helper-text" *ngIf="optionHints[i]">Ex: {{ optionHints[i] }}</span>
+                    </div>
+                    <div class="input-field col s1 option-delete-btn" *ngIf="i >= 2">
+                        <button class="btn-floating btn-small red" (click)="onDeleteOptionClick(i)">
+                            <i class="material-icons left">delete</i>
+                        </button>
                     </div>
                 </div>
-            </div>
+            </ng-container>
                 
             <div class="row">
-                <div class="input-field col s12">
+                <div class="input-field col s5 offset-s1">
+                    <button
+                        class="btn waves-effect"
+                        (click)="onAddOptionClick()">
+                        <i class="material-icons left">add</i>
+                        Nova Opção
+                    </button>
+                </div>
+                <div class="input-field col s6">
                     <button 
                         class="btn waves-effect right" 
                         type="submit" 

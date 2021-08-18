@@ -31,4 +31,10 @@ export class PollDataService {
       .collection('polls', ref => ref.where('userId', '==', userId))
       .valueChanges({ idField: 'id' });
   }
+
+  addPoll(newPoll: any){
+    return this.firestore
+      .collection('polls')
+      .add(newPoll);    
+  }
 }
