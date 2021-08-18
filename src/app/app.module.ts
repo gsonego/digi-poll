@@ -16,6 +16,8 @@ import { environment } from 'src/environments/environment';
 import { AddPollComponent } from './pages/add-poll/add-poll.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PollCardComponent } from './shared/poll-card/poll-card.component';
+import { EditPollComponent } from './pages/edit-poll/edit-poll.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { PollCardComponent } from './shared/poll-card/poll-card.component';
     MyPollsComponent,
     HorizontalBannerComponent,
     AddPollComponent,
-    PollCardComponent
+    PollCardComponent,
+    EditPollComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

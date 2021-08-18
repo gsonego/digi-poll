@@ -4,4 +4,6 @@ export interface Poll {
     creation: string;
     userId: string;
     votes: number;
+    optionCount: number;
+    [key: string]: any
 }

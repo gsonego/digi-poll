@@ -10,18 +10,20 @@ import { PollDataService } from '../../services/poll-data-service';
 export class PollComponent implements OnInit {
   poll: any | undefined;
 
-  constructor(private route: ActivatedRoute, private pollDataService: PollDataService) {
+  constructor(
+    private route: ActivatedRoute,
+    private pollDataService: PollDataService) {
   }
 
   ngOnInit(): void {
     // First get the product id from the current route.
     const routeParams = this.route.snapshot.paramMap;
     const pollId = routeParams.get('pollId');
-    
+
     this.pollDataService
-    .getPoll(pollId || "")
-    .subscribe(res => {
-         this.processPollData( res.payload.data() ); 
+      .getPoll(pollId || "")
+      .subscribe(res => {
+        this.processPollData(res.payload.data());
       });
   }
 
@@ -33,14 +35,14 @@ export class PollComponent implements OnInit {
       options: []
     }
 
-    const options = pollData.options || 0; 
+    const options = pollData.options || 0;
     const optionList: any[] = [];
 
     for (let index = 1; index <= options; index++) {
       const value = pollData[`${index}.option`];
       const votes = pollData[`${index}.votes`];
       const percentage = votes / pollData.votes;
-      
+
       const option = {
         index,
         value,

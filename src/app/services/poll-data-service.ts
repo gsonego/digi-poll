@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { Poll } from '../models/poll.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PollDataService {
-
-  constructor(private firestore: AngularFirestore) { }
+  private itemDoc: AngularFirestoreDocument<Poll>;
+  item: Observable<Poll | undefined>;
+  
+  constructor(private firestore: AngularFirestore) {
+   }
 
   getTopPolls() {
     return this.firestore
@@ -25,6 +30,17 @@ export class PollDataService {
       .doc(`polls/${id}`)
       .snapshotChanges();
   }
+
+  getPollData(id: string) {
+    this.itemDoc = this.firestore.doc<Poll>(`polls/${id}`);
+    this.item = this.itemDoc.valueChanges();
+
+    return this.item;
+
+    // return this.firestore
+    //   .doc(`polls/${id}`)
+    //   .snapshotChanges();
+  }  
 
   getPollByUser(userId: string){
     return this.firestore

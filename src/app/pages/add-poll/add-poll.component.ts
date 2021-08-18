@@ -29,10 +29,10 @@ export class AddPollComponent implements OnInit {
   ngOnInit(): void {
     // initialize form group
     this.addForm = this.fb.group({
-      title: new FormControl('Qual a melhor banda de todos os tempos?', [Validators.required]),
+      title: new FormControl('', [Validators.required]),
       options: this.fb.array([
-        new FormControl('Queen', [Validators.required]),
-        new FormControl('Beatles', [Validators.required])
+        new FormControl('', [Validators.required]),
+        new FormControl('', [Validators.required])
       ])
     });
   }
