@@ -15,6 +15,7 @@ import { AngularFireModule } from '@angular/fire'
 import { environment } from 'src/environments/environment';
 import { AddPollComponent } from './pages/add-poll/add-poll.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PollCardComponent } from './shared/poll-card/poll-card.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     MyPollsComponent,
     HorizontalBannerComponent,
-    AddPollComponent
+    AddPollComponent,
+    PollCardComponent
   ],
   imports: [
     BrowserModule,
