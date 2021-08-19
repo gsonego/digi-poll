@@ -41,9 +41,12 @@ export class MyPollsComponent implements OnInit {
     this.pollDataService
       .deletePoll(pollId)
       .then(result => {
-        console.log(`Enquete ${pollId} excluída com sucesso!`);
+        const msg = `Enquete ${pollId} excluída com sucesso!`;
+        alert(msg);
+        console.log(msg);
       })
       .catch(error => {
+        alert("Desculpe, houve um erro ao tentar excluir enquete!");
         console.error(error);
       });
   }
