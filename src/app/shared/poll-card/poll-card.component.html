@@ -5,11 +5,12 @@
         </div>
         <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">
-                {{ poll.title }}
+                <a [routerLink]="['/poll', poll.id]">{{ poll.title }}</a>
             </span>
         </div>
         <div class="card-action">
-            <a [routerLink]="['/poll', poll.id]">Ver enquete</a>
+            <i class="material-icons grey-text">touch_app</i>
+            <span class="votes grey-text">{{ poll.votes }}</span>
           </div>
     </div>
 </div>

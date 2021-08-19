@@ -12,7 +12,7 @@ import { NewPoll } from '../../models/newPoll';
   styleUrls: ['./add-poll.component.scss']
 })
 export class AddPollComponent implements OnInit {
-  userId: string;
+  userId: string = "";
   addForm: FormGroup;
   optionHints: string[] = ['Queen', 'Beatles', 'Metallica', 'Rolling Stones']
 

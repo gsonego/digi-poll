@@ -11,13 +11,13 @@ export class PollComponent implements OnInit {
   poll: any | undefined;
 
   constructor(
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private pollDataService: PollDataService) {
   }
 
   ngOnInit(): void {
     // First get the product id from the current route.
-    const routeParams = this.route.snapshot.paramMap;
+    const routeParams = this.activatedRoute.snapshot.paramMap;
     const pollId = routeParams.get('pollId');
 
     this.pollDataService
@@ -42,8 +42,8 @@ export class PollComponent implements OnInit {
     const optionList: any[] = [];
 
     for (let index = 1; index <= optionCount; index++) {
-      const value = pollData[`${index}.option`];
-      const votes = pollData[`${index}.votes`];
+      const value = pollData[`${index}_option`];
+      const votes = pollData[`${index}_votes`];
       const percentage = votes / pollData.votes;
 
       const option = {
@@ -60,5 +60,4 @@ export class PollComponent implements OnInit {
 
     this.poll.options = sortedList;
   }
-
 }

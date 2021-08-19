@@ -15,13 +15,13 @@ export class PollDataService {
 
   getTopPolls() {
     return this.firestore
-      .collection('polls', ref => ref.orderBy('votes', 'desc').limit(5))
+      .collection('polls', ref => ref.orderBy('votes', 'desc').limit(8))
       .valueChanges({ idField: 'id' });
   }
 
   getRecentPolls() {
     return this.firestore
-      .collection('polls', ref => ref.orderBy('creation', 'desc').limit(5))
+      .collection('polls', ref => ref.orderBy('creation', 'desc').limit(8))
       .valueChanges({ idField: 'id' })
   }
 
@@ -36,10 +36,6 @@ export class PollDataService {
     this.item = this.itemDoc.valueChanges();
 
     return this.item;
-
-    // return this.firestore
-    //   .doc(`polls/${id}`)
-    //   .snapshotChanges();
   }  
 
   getPollByUser(userId: string){
@@ -49,25 +45,15 @@ export class PollDataService {
   }
 
   addPoll(newPoll: any){
-    // var pollRef: AngularFirestoreCollection<Poll> = this.firestore.collection("/polls");
-
-    // var myNewPoll: Poll = {
-    //   id: "",
-    //   title: "",
-    //   creation: "",
-    //   userId: "",
-    //   votes: 0,
-    //   optionCount: 2
-    // }
-
-    // pollRef.add(myNewPoll)
-    // .then((result) => {
-    //   result.id
-    // })
-
     return this.firestore
       .collection('polls')
       .add(newPoll);    
+  }
+
+  editPoll(pollId: string, editedPoll: any){
+    return this.firestore
+      .doc(`polls/${pollId}`)
+      .update(editedPoll);  
   }
 
   deletePoll(pollId: string) {

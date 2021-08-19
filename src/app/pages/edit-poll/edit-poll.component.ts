@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EditPoll } from 'src/app/models/editPoll';
 import { Poll } from 'src/app/models/poll.model';
 
@@ -13,7 +13,7 @@ import { PollDataService } from 'src/app/services/poll-data-service';
   styleUrls: ['./edit-poll.component.scss']
 })
 export class EditPollComponent implements OnInit {
-
+  pollId: string | null;
   userId: string;
   editForm: FormGroup;
   optionHints: string[] = ['Queen', 'Beatles', 'Metallica', 'Rolling Stones']
@@ -21,6 +21,7 @@ export class EditPollComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private pollDataService: PollDataService,
+    private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder) {
 
@@ -34,10 +35,10 @@ export class EditPollComponent implements OnInit {
   ngOnInit(): void {
     // First get the product id from the current route.
     const routeParams = this.route.snapshot.paramMap;
-    const pollId = routeParams.get('pollId');
+    this.pollId = routeParams.get('pollId');
 
     this.createForm();
-    this.loadData(pollId || "");
+    this.loadData();
   }
 
   createForm() {
@@ -60,25 +61,29 @@ export class EditPollComponent implements OnInit {
     return new FormControl('', [Validators.required]);
   }
 
-  loadData(pollId: string) {
+  loadData() {
+    if (!this.pollId)
+      return;
+
     this.pollDataService
-    .getPollData(pollId)
-    .subscribe(res => {
-      this.loadForm(res);
-    });
+      .getPollData(this.pollId)
+      .subscribe(res => {
+        this.loadForm(res);
+      });
   }
 
   loadForm(formData: Poll | undefined) {
     if (!formData) return;
 
-    console.log(formData);
-
     // Loading data into a flat form is easy - just use patchValue
     this.editForm.patchValue(formData);
 
+    // clear any existing option
+    this.options.clear();
+
     for (let index = 1; index <= formData.optionCount; index++) {
       const option = this.createOption();
-      option.patchValue(formData[index + '.option'])
+      option.patchValue(formData[`${index}_option`])
       this.options.push(option);
     }
   }
@@ -101,26 +106,30 @@ export class EditPollComponent implements OnInit {
 
   onSubmit() {
     if (this.editForm.invalid) return;
+    if (!this.pollId) return;
 
-    var newPoll: EditPoll = {
+    // prepare basic poll object
+    var editedPoll: EditPoll = {
       title: this.editForm.value['title'],
-      creation: new Date().toISOString(),
-      userId: this.userId,
-      optionCount: this.options.length,
-      votes: 0
+      optionCount: this.options.length
     };
 
+    // add options
     for (let index = 1; index <= this.options.length; index++) {
       const option = this.editForm.value['options'][index - 1];
 
-      newPoll[index + ".option"] = option;
-      newPoll[index + ".votes"] = 0;
+      editedPoll[`${index}_option`] = option;
+      editedPoll[`${index}_votes`] = 0;
     }
 
-    this.pollDataService.addPoll(newPoll)
+    this.pollDataService.editPoll(this.pollId, editedPoll)
       .then(result => {
-        console.log(result);
+        alert("Enquete atualizada com sucesso");
+
+        this.router.navigate(['/poll', this.pollId]);
+
       }).catch(error => {
+        alert("Oops, houve um erro ao tentar atualizar a enquete!")
         console.log(error);
       });
   }
