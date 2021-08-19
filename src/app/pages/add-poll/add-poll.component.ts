@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/services/auth-service';
 import { PollDataService } from 'src/app/services/poll-data-service';
@@ -17,6 +18,7 @@ export class AddPollComponent implements OnInit {
 
   constructor(private authService: AuthService,
     private pollDataService: PollDataService,
+    private router: Router,
     private fb: FormBuilder) {
 
     this.authService.auth.user.subscribe(user => {
@@ -55,7 +57,7 @@ export class AddPollComponent implements OnInit {
       title: this.addForm.value['title'],
       creation: new Date().toISOString(),
       userId: this.userId,
-      options: this.options.length,
+      optionCount: this.options.length,
       votes: 0
     };
     
@@ -69,6 +71,9 @@ export class AddPollComponent implements OnInit {
     this.pollDataService.addPoll(newPoll)
       .then(result => {
         console.log(result);
+        alert('Enquete criada com sucesso!');
+        this.router.navigate(['/my-polls']);
+
       }).catch(error => {
         console.log(error);
       });

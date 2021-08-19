@@ -17,41 +17,45 @@
                     <span class="helper-text">Ex: Qual a maior banda de Rock de todos os tempos ?</span>
                 </div>
             </div>
-            
+
             <ng-container formArrayName="options">
                 <div class="row option-item" *ngFor="let option of options.controls; let i=index">
-                    <div class="input-field col s10 offset-s1">
+                    <!--
+                    <div class="col s1">
+                        <input type="file" name="file" id="file" class="inputfile" />
+                        <label for="file">
+                            <i class="material-icons left">file_upload</i>                            
+                        </label>                            
+                    </div>    
+                    -->
+
+                    <div class="input-field col s10">
                         <input type="text" class="validate" [formControlName]="i" required>
                         <label>Opção {{ i + 1}}</label>
                         <span class="helper-text" *ngIf="optionHints[i]">Ex: {{ optionHints[i] }}</span>
                     </div>
-                    <div class="input-field col s1 option-delete-btn" *ngIf="i >= 2">
-                        <button class="btn-floating btn-small red" (click)="onDeleteOptionClick(i)">
+
+                    <div class="input-field col s1 option-delete-btn">
+                        <button *ngIf="i >= 2" class="btn-floating btn-small red" (click)="onDeleteOptionClick(i)">
                             <i class="material-icons left">delete</i>
                         </button>
                     </div>
                 </div>
             </ng-container>
-                
+
             <div class="row">
                 <div class="input-field col s5 offset-s1">
-                    <button
-                        class="btn waves-effect"
-                        (click)="onAddOptionClick()">
+                    <button class="btn waves-effect" (click)="onAddOptionClick()">
                         <i class="material-icons left">add</i>
                         Nova Opção
                     </button>
                 </div>
                 <div class="input-field col s6">
-                    <button 
-                        class="btn waves-effect right" 
-                        type="submit" 
-                        name="action"
-                        [disabled]="addForm.invalid">
+                    <button class="btn waves-effect right" type="submit" name="action" [disabled]="addForm.invalid">
                         Gravar
                     </button>
                 </div>
-            </div>            
+            </div>
         </form>
     </div>
 </div>

@@ -35,10 +35,10 @@ export class PollComponent implements OnInit {
       options: []
     }
 
-    const options = pollData.options || 0;
+    const optionCount = pollData.optionCount || 0;
     const optionList: any[] = [];
 
-    for (let index = 1; index <= options; index++) {
+    for (let index = 1; index <= optionCount; index++) {
       const value = pollData[`${index}.option`];
       const votes = pollData[`${index}.votes`];
       const percentage = votes / pollData.votes;

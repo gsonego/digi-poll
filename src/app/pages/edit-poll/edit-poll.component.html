@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="input-field col s12">
                     <input id="title" type="text" class="validate" formControlName="title" required>
-                    <label for="title">Título da enquete</label>
+                    <label class="active" for="title">Título da enquete</label>
                     <span class="helper-text">Ex: Qual a maior banda de Rock de todos os tempos ?</span>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                 <div class="row option-item" *ngFor="let option of options.controls; let i=index">
                     <div class="input-field col s10 offset-s1">
                         <input type="text" class="validate" [formControlName]="i" required>
-                        <label>Opção {{ i + 1}}</label>
+                        <label class="active">Opção {{ i + 1}}</label>
                         <span class="helper-text" *ngIf="optionHints[i]">Ex: {{ optionHints[i] }}</span>
                     </div>
                     <div class="input-field col s1 option-delete-btn" *ngIf="i >= 2">
