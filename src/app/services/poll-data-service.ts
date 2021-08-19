@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Poll } from '../models/poll.model';
 
@@ -49,8 +49,30 @@ export class PollDataService {
   }
 
   addPoll(newPoll: any){
+    // var pollRef: AngularFirestoreCollection<Poll> = this.firestore.collection("/polls");
+
+    // var myNewPoll: Poll = {
+    //   id: "",
+    //   title: "",
+    //   creation: "",
+    //   userId: "",
+    //   votes: 0,
+    //   optionCount: 2
+    // }
+
+    // pollRef.add(myNewPoll)
+    // .then((result) => {
+    //   result.id
+    // })
+
     return this.firestore
       .collection('polls')
       .add(newPoll);    
+  }
+
+  deletePoll(pollId: string) {
+    return this.firestore
+      .doc<Poll>(`polls/${pollId}`)
+      .delete();
   }
 }

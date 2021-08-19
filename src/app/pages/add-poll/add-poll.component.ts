@@ -70,11 +70,11 @@ export class AddPollComponent implements OnInit {
 
     this.pollDataService.addPoll(newPoll)
       .then(result => {
-        console.log(result);
         alert('Enquete criada com sucesso!');
-        this.router.navigate(['/my-polls']);
 
+        this.router.navigate(['/poll', result.id]);
       }).catch(error => {
+        alert('Oops, houve um erro ao tentar criar nova enquete.');  
         console.log(error);
       });
   }

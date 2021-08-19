@@ -23,11 +23,14 @@ export class PollComponent implements OnInit {
     this.pollDataService
       .getPoll(pollId || "")
       .subscribe(res => {
+        console.log("passou aqui");
         this.processPollData(res.payload.data());
       });
   }
 
   processPollData(pollData: any) {
+    if (!pollData) return;
+
     this.poll = {
       title: pollData.title,
       creation: pollData.creation,

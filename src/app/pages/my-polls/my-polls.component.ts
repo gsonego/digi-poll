@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+
 import { AuthService } from '../../services/auth-service';
 import { PollDataService } from '../../services/poll-data-service';
 
@@ -35,8 +36,15 @@ export class MyPollsComponent implements OnInit {
 
   onDeleteItemClick(pollId: string) {
     var result = window.confirm('Deseja realmente excluir este item ?');
+    if (!result) return;
 
-    console.log(result, pollId);
-    // ${pollId}
+    this.pollDataService
+      .deletePoll(pollId)
+      .then(result => {
+        console.log(`Enquete ${pollId} excluída com sucesso!`);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 }
