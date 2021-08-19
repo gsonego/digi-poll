@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="input-field col s1 option-delete-btn">
-                        <button *ngIf="i >= 2" class="btn-floating btn-small red" (click)="onDeleteOptionClick(i)">
+                        <button *ngIf="options.length > 2" class="btn-floating btn-small red" (click)="onDeleteOptionClick(i)">
                             <i class="material-icons left">delete</i>
                         </button>
                     </div>

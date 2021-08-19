@@ -25,7 +25,7 @@
                         <label class="active">Opção {{ i + 1}}</label>
                         <span class="helper-text" *ngIf="optionHints[i]">Ex: {{ optionHints[i] }}</span>
                     </div>
-                    <div class="input-field col s1 option-delete-btn" *ngIf="i >= 2">
+                    <div class="input-field col s1 option-delete-btn" *ngIf="options.length > 2">
                         <button class="btn-floating btn-small red" (click)="onDeleteOptionClick(i)">
                             <i class="material-icons left">delete</i>
                         </button>
