@@ -1,3 +1,11 @@
+.poll-wrapper {
+    margin-top: 40px;
+}
+
+.poll-action {
+    position: relative;
+}
+
 .poll {
     border: 1px solid #dedede;
     background-color: #f7f7f7;
@@ -5,20 +13,35 @@
 }
 
 .poll-header {
-    //
-
-    > .poll-title {
-        color: black;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
+.poll-data {
+    display: flex;   
+    align-items: center; 
+}
+
+.poll-text  {
+    padding-left: 20px;   
+}
+
+.poll-image img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+.poll-title {
+    color: black;
+}
 .poll-body {
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .poll-option {
     margin-top: 10px;
-
 }
 
 .option-perc {

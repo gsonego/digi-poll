@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PollDataService } from '../../services/poll-data-service';
 
 @Component({
@@ -8,9 +8,11 @@ import { PollDataService } from '../../services/poll-data-service';
   styleUrls: ['./poll.component.scss']
 })
 export class PollComponent implements OnInit {
+  pollId: string | null;
   poll: any | undefined;
 
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private pollDataService: PollDataService) {
   }
@@ -18,12 +20,13 @@ export class PollComponent implements OnInit {
   ngOnInit(): void {
     // First get the product id from the current route.
     const routeParams = this.activatedRoute.snapshot.paramMap;
-    const pollId = routeParams.get('pollId');
+    this.pollId = routeParams.get('pollId');
+
+    if (!this.pollId) return;
 
     this.pollDataService
-      .getPoll(pollId || "")
+      .getPoll(this.pollId)
       .subscribe(res => {
-        console.log("passou aqui");
         this.processPollData(res.payload.data());
       });
   }
@@ -35,6 +38,7 @@ export class PollComponent implements OnInit {
       title: pollData.title,
       creation: pollData.creation,
       votes: pollData.votes,
+      image: pollData.image,
       options: []
     }
 
@@ -59,5 +63,9 @@ export class PollComponent implements OnInit {
     let sortedList = optionList.sort((a, b) => b.votes - a.votes);
 
     this.poll.options = sortedList;
+  }
+
+  onEditPollClick() {
+    this.router.navigate(['/edit-poll', this.pollId]);
   }
 }

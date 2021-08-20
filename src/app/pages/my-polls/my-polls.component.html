@@ -8,14 +8,17 @@
 </div>
 
 <ul class="collection">
-
   <!-- Pool Item -->
   <li class="collection-item avatar" *ngFor="let poll of userPolls | async">
-    <i class="material-icons circle indigo">insert_chart</i>
+    <i class="material-icons circle green item-button" *ngIf="!poll.active" (click)="onActivatePollClick(poll.id)">play_arrow</i>
+    <i class="material-icons circle blue" *ngIf="poll.active">fast_forward</i>
+    
     <span class="title flow-text">
       <a [routerLink]="['/poll', poll.id]">{{ poll.title }}</a>
     </span>
+    
     <p class="grey-text">Votos: {{ poll.votes }}</p>
+    
     <span class="secondary-content">
       <i class="material-icons grey-text edit-item" (click)="onEditItemClick(poll.id)">create</i>
       <i class="material-icons grey-text delete-item" (click)="onDeleteItemClick(poll.id)">delete</i>

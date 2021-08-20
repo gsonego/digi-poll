@@ -1,3 +1,9 @@
+<div class="card-panel yellow lighten-3" *ngIf="poll?.active">
+    <span class="flow-text">
+        Esta enquete já foi iniciada e não pode mais ser editada.
+    </span>
+</div>
+
 <div class="card">
     <div class="card-content">
         <h5 class="card-title">
@@ -17,7 +23,7 @@
                     <span class="helper-text">Ex: Qual a maior banda de Rock de todos os tempos ?</span>
                 </div>
             </div>
-            
+
             <ng-container formArrayName="options">
                 <div class="row option-item" *ngFor="let option of options.controls; let i=index">
                     <div class="input-field col s10 offset-s1">
@@ -32,12 +38,10 @@
                     </div>
                 </div>
             </ng-container>
-                
+
             <div class="row">
                 <div class="input-field col s5 offset-s1">
-                    <button
-                        class="btn waves-effect"
-                        (click)="onAddOptionClick()">
+                    <button class="btn waves-effect" (click)="onAddOptionClick()">
                         <i class="material-icons left">add</i>
                         Nova Opção
                     </button>
@@ -46,12 +50,12 @@
                     <button 
                         class="btn waves-effect right" 
                         type="submit" 
-                        name="action"
+                        name="action" 
                         [disabled]="editForm.invalid">
                         Gravar
                     </button>
                 </div>
-            </div>            
+            </div>
         </form>
     </div>
 </div>

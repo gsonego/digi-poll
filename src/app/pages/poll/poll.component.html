@@ -1,33 +1,47 @@
 <app-horizontal-banner></app-horizontal-banner>
 
-<div class="poll">
-    <div class="poll-header">
-        <div class="poll-title flow-text black-text">
-            {{ poll?.title }}
-        </div>
-        <div class="poll-creation grey-text">
-            Criado em <span>{{ poll?.creation | date:'dd/MM/yyyy HH:mm' }}</span>
-        </div>
+<div class="poll-wrapper">
+    <div class="poll-action">
+        <button class="btn-floating halfway-fab waves-effect green" (click)="onEditPollClick()">
+            <i class="material-icons">mode_edit</i>
+        </button>
     </div>
-    <div class="poll-body">
 
-        <div class="poll-option row" *ngFor="let option of poll?.options">
-            <div class="option-value col s6 flow-text">
-                {{ option.value }}
-            </div>
-            <div class="option-perc col s4 flow-text">
-                <div class="option-perc-bar indigo lighten-1" [ngStyle]="{'width.%': option.percentage*100 }"></div>
-                <div class="option-perc-value grey-text text-darken-2">
-                    {{ option.percentage | percent:"1.2-2" }}
+    <div class="poll">
+        <div class="poll-header">
+            <div class="poll-data">
+                <div class="poll-image">
+                    <img [src]="poll.image ? poll.image : '../../../assets/images/polls.jpg'">
+                </div>
+                <div class="poll-text">
+                    <div class="poll-title flow-text black-text">
+                        {{ poll?.title }}
+                    </div>
+                    <div class="poll-creation grey-text">
+                        Criado em <span>{{ poll?.creation | date:'dd/MM/yyyy HH:mm' }}</span>
+                    </div>
                 </div>
             </div>
-            <div class="option-votes col s2 flow-text light-blue-text text-darken-2">
-                <span>{{ option.votes }}</span>
+        </div>
+        <div class="poll-body">
+            <div class="poll-option row" *ngFor="let option of poll?.options">
+                <div class="option-value col s6 flow-text">
+                    {{ option.value }}
+                </div>
+                <div class="option-perc col s4 flow-text">
+                    <div class="option-perc-bar indigo lighten-1" [ngStyle]="{'width.%': option.percentage*100 }"></div>
+                    <div class="option-perc-value grey-text text-darken-2">
+                        {{ option.percentage | percent:"1.2-2" }}
+                    </div>
+                </div>
+                <div class="option-votes col s2 flow-text light-blue-text text-darken-2">
+                    <span>{{ option.votes }}</span>
+                </div>
             </div>
-        </div>        
-    </div>
+        </div>
 
-    <div class="poll-total flow-text">
-       Total de Votos: <span class="total-votes">{{ poll?.votes }}</span>
+        <div class="poll-total flow-text">
+            Total de Votos: <span class="total-votes">{{ poll?.votes }}</span>
+        </div>
     </div>
 </div>

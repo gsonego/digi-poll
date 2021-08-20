@@ -58,7 +58,8 @@ export class AddPollComponent implements OnInit {
       creation: new Date().toISOString(),
       userId: this.userId,
       optionCount: this.options.length,
-      votes: 0
+      votes: 0,
+      active: false
     };
     
     for (let index = 1; index <= this.options.length; index++) {

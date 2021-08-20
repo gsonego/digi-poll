@@ -61,4 +61,10 @@ export class PollDataService {
       .doc<Poll>(`polls/${pollId}`)
       .delete();
   }
+
+  activatePoll(pollId: string) {
+    return this.firestore
+      .doc<Poll>(`polls/${pollId}`)
+      .update({ active: true });  
+  }
 }

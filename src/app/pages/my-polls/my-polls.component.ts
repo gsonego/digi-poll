@@ -50,4 +50,20 @@ export class MyPollsComponent implements OnInit {
         console.error(error);
       });
   }
+
+  onActivatePollClick(pollId: string) {
+    var result = window.confirm("Deseja realmente ativar a enquete ?");
+
+    if (!result) return;
+
+    this.pollDataService
+      .activatePoll(pollId)
+      .then(res => {
+        // no feedback needed
+      })
+      .catch(err => {
+        alert("Desculpe, houve um erro ao tentar ativar a enquete.")
+        console.error(err);
+      });
+  }
 }

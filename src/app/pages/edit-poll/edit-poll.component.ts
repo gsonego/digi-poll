@@ -13,6 +13,7 @@ import { PollDataService } from 'src/app/services/poll-data-service';
   styleUrls: ['./edit-poll.component.scss']
 })
 export class EditPollComponent implements OnInit {
+  poll: Poll | undefined;
   pollId: string | null;
   userId: string;
   editForm: FormGroup;
@@ -68,6 +69,7 @@ export class EditPollComponent implements OnInit {
     this.pollDataService
       .getPollData(this.pollId)
       .subscribe(res => {
+        this.poll = res;
         this.loadForm(res);
       });
   }
@@ -81,7 +83,9 @@ export class EditPollComponent implements OnInit {
     // clear any existing option
     this.options.clear();
 
-    for (let index = 1; index <= formData.optionCount; index++) {
+    const optionCount = formData.optionCount || 2;
+
+    for (let index = 1; index <= optionCount; index++) {
       const option = this.createOption();
       option.patchValue(formData[`${index}_option`])
       this.options.push(option);
@@ -107,6 +111,11 @@ export class EditPollComponent implements OnInit {
   onSubmit() {
     if (this.editForm.invalid) return;
     if (!this.pollId) return;
+
+    if (this.poll?.active) {
+      alert("Desculpe, esta enquete já foi iniciada e não pode mais ser editada!");
+      return;
+    }
 
     // prepare basic poll object
     var editedPoll: EditPoll = {

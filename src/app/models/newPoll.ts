@@ -1,6 +1,7 @@
 export interface NewPoll {
-    title: string,
-    votes?: number,
-    optionCount: number,
-    [key: string]: any
+    title: string;
+    votes?: number;
+    optionCount: number;
+    active: boolean;
+    [key: string]: any;
 }
