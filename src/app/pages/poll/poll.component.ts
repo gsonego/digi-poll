@@ -38,7 +38,7 @@ export class PollComponent implements OnInit {
       title: pollData.title,
       creation: pollData.creation,
       votes: pollData.votes,
-      image: pollData.image,
+      imageUrl: pollData.imageUrl,
       options: []
     }
 

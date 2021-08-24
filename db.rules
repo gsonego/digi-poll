@@ -2,14 +2,17 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /polls/{pollId} {
-	  // todos podem ler os documentos
+			// todos podem ler os documentos
       allow read: if true; 
       
       // somente logados podem criar
       allow create: if request.auth != null;
 
-	  // somente donos da enquete podem editar ou excluir
-      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+			// qualquer um pode editar (votos)
+      allow update: if request.auth != null;
+      
+			// somente donos da enquete podem excluir
+      allow delete: if request.auth != null && request.auth.uid == resource.data.userId;
     }    
   }
 }

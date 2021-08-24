@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Poll } from '../models/poll.model';
 
@@ -9,9 +9,9 @@ import { Poll } from '../models/poll.model';
 export class PollDataService {
   private itemDoc: AngularFirestoreDocument<Poll>;
   item: Observable<Poll | undefined>;
-  
+
   constructor(private firestore: AngularFirestore) {
-   }
+  }
 
   getTopPolls() {
     return this.firestore
@@ -36,24 +36,24 @@ export class PollDataService {
     this.item = this.itemDoc.valueChanges();
 
     return this.item;
-  }  
+  }
 
-  getPollByUser(userId: string){
+  getPollByUser(userId: string) {
     return this.firestore
       .collection('polls', ref => ref.where('userId', '==', userId))
       .valueChanges({ idField: 'id' });
   }
 
-  addPoll(newPoll: any){
+  addPoll(newPoll: any) {
     return this.firestore
       .collection('polls')
-      .add(newPoll);    
+      .add(newPoll);
   }
 
-  editPoll(pollId: string, editedPoll: any){
+  editPoll(pollId: string, editedPoll: any) {
     return this.firestore
       .doc(`polls/${pollId}`)
-      .update(editedPoll);  
+      .update(editedPoll);
   }
 
   deletePoll(pollId: string) {
@@ -65,6 +65,6 @@ export class PollDataService {
   activatePoll(pollId: string) {
     return this.firestore
       .doc<Poll>(`polls/${pollId}`)
-      .update({ active: true });  
+      .update({ active: true });
   }
 }

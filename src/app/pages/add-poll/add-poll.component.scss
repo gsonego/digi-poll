@@ -1,3 +1,8 @@
+.option-header {
+	display: flex;
+	align-items: center;
+}
+
 .option-item{
     display: flex;
     align-items: center;
@@ -12,3 +17,20 @@
 	z-index: -1;
 }
 
+.upload-image {
+	min-height: 80px;
+	max-width: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	border: 1px dashed gray;
+	cursor: pointer;
+}
+
+.upload-image img {
+	width: 80px;
+	height: 80px; 
+	padding: 2px; 
+	border-radius: 50%;
+}

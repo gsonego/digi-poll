@@ -4,14 +4,19 @@
             Nova Enquete
         </h5>
 
-        <div class="col s12">
-            Informe um título para sua nova enquete e digite abaixo as opções válidas para sua pesquisa.
-        </div>
-
         <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
 
-            <div class="row">
-                <div class="input-field col s12">
+            <p>{{ imageInfo  }}</p>
+
+            <div class="row option-header">
+                <input type="file" class="inputfile" (change)="onSelectFile($event)" #uploadPollImage />
+
+                <div class="upload-image col s1" (click)="uploadPollImage.click()">
+                    <img [src]="pollImageUrl" *ngIf="pollImageUrl" alt="Imagem da enquete">
+                    <i class="material-icons grey-text" *ngIf="!pollImageUrl">file_upload</i>
+                </div>
+
+                <div class="input-field col s11">
                     <input id="title" type="text" class="validate" formControlName="title" required>
                     <label for="title">Título da enquete</label>
                     <span class="helper-text">Ex: Qual a maior banda de Rock de todos os tempos ?</span>
@@ -20,13 +25,12 @@
 
             <ng-container formArrayName="options">
                 <div class="row option-item" *ngFor="let option of options.controls; let i=index">
-                    <!--
-                    <div class="col s1">
-                        <input type="file" name="file" id="file" class="inputfile" />
-                        <label for="file">
-                            <i class="material-icons left">file_upload</i>                            
-                        </label>                            
-                    </div>    
+
+                    <!-- 
+                        <div class="upload-image col s1">
+                        <input type="file" class="inputfile" #uploadItemImage />
+                        <i class="material-icons left grey-text" (click)="uploadItemImage.click()">file_upload</i>                            
+                    </div>     
                     -->
 
                     <div class="input-field col s10">
@@ -36,7 +40,8 @@
                     </div>
 
                     <div class="input-field col s1 option-delete-btn">
-                        <button *ngIf="options.length > 2" class="btn-floating btn-small red" (click)="onDeleteOptionClick(i)">
+                        <button *ngIf="options.length > 2" class="btn-floating btn-small red"
+                            (click)="onDeleteOptionClick(i)">
                             <i class="material-icons left">delete</i>
                         </button>
                     </div>
