@@ -24,8 +24,8 @@
             </div>
         </div>
         <div class="poll-body">
-            <div class="poll-option row" *ngFor="let option of poll?.options">
-                <div class="option-value col s6 flow-text">
+            <div class="poll-option row" [ngClass]="{'blue lighten-4': option.voted}" *ngFor="let option of poll?.options">
+                <div class="option-value col s5 flow-text">
                     {{ option.value }}
                 </div>
                 <div class="option-perc col s4 flow-text">
@@ -37,6 +37,13 @@
                 <div class="option-votes col s2 flow-text light-blue-text text-darken-2">
                     <span>{{ option.votes }}</span>
                 </div>
+                <div class="vote-button col s1">
+                    <button class="btn" 
+                        *ngIf="votationOpen && !votationClosed" 
+                        (click)="onOptionSelection(option)">
+                        Votar
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -44,4 +51,9 @@
             Total de Votos: <span class="total-votes">{{ poll?.votes }}</span>
         </div>
     </div>
+
+    <div class="poll-vote-button center">
+        <button class="btn" *ngIf="!votationOpen" (click)="onVotePollClick()">Quero votar!</button>
+    </div>
 </div>
+

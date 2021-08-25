@@ -10,6 +10,9 @@ import { PollDataService } from '../../services/poll-data-service';
 export class PollComponent implements OnInit {
   pollId: string | null;
   poll: any | undefined;
+  votationOpen: boolean = false;
+  votationClosed: boolean = false;
+  optionSelected: number = 0;
 
   constructor(
     private router: Router,
@@ -67,5 +70,31 @@ export class PollComponent implements OnInit {
 
   onEditPollClick() {
     this.router.navigate(['/edit-poll', this.pollId]);
+  }
+
+  onVotePollClick() {
+    this.votationOpen = true;    
+  }
+
+  onOptionSelection(option: any) {
+    option.voted = true;
+    this.votationClosed = true;
+
+    if (!this.pollId) return;
+
+    var editedPoll: any = {
+      votes: this.poll.votes + 1  
+    };
+
+    editedPoll[`${option.index}_votes`] = option.votes + 1;
+
+    this.pollDataService.editPoll(this.pollId, editedPoll)
+      .then(result => {
+        console.log("Enquete atualizada com sucesso");
+      }).catch(error => {
+        alert("Oops, houve um erro ao tentar atualizar a enquete!")
+        console.log(error);
+      });
+
   }
 }
