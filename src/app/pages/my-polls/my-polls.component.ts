@@ -36,14 +36,14 @@ export class MyPollsComponent implements OnInit {
     this.router.navigate(['/edit-poll', pollId]);
   }
 
-  onDeleteItemClick(pollId: string) {
+  onDeleteItemClick(pollId: string, pollTitle: string) {
     var result = window.confirm('Deseja realmente excluir este item ?');
     if (!result) return;
 
     this.pollDataService
       .deletePoll(pollId)
       .then(result => {
-        this.toastr.success(`Enquete ${pollId} excluída com sucesso!`);
+        this.toastr.success(`Enquete '${pollTitle}' excluída com sucesso!`);
       })
       .catch(error => {
         this.toastr.error("Desculpe, houve um erro ao tentar excluir enquete!");

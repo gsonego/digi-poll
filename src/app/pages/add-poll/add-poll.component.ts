@@ -92,7 +92,7 @@ export class AddPollComponent implements OnInit {
       imageUrl: imageUrl,
       optionCount: this.options.length,
       votes: 0,
-      active: true // todo: set to false in the future
+      active: false
     };
 
     for (let index = 1; index <= this.options.length; index++) {

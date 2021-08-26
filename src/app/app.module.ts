@@ -44,7 +44,10 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     AngularFirestoreModule,
     AngularFireStorageModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({  
+      progressBar: true,
+      progressAnimation: 'decreasing'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
