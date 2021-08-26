@@ -1,11 +1,5 @@
 {
-  "targets": {
-    "digi-poll": {
-      "hosting": {
-        "DigiPoll": [
-          "digi-poll"
-        ]
-      }
-    }
+  "projects": {
+    "default": "digi-poll"
   }
 }
