@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { EditPoll } from 'src/app/models/editPoll';
 import { Poll } from 'src/app/models/poll.model';
 
@@ -24,7 +25,8 @@ export class EditPollComponent implements OnInit {
     private pollDataService: PollDataService,
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private toastr: ToastrService) {
 
     this.authService.auth.user.subscribe(user => {
       if (user) {
@@ -113,7 +115,7 @@ export class EditPollComponent implements OnInit {
     if (!this.pollId) return;
 
     if (this.poll?.active) {
-      alert("Desculpe, esta enquete já foi iniciada e não pode mais ser editada!");
+      this.toastr.error("Desculpe, esta enquete já foi iniciada e não pode mais ser editada!");
       return;
     }
 
@@ -133,12 +135,10 @@ export class EditPollComponent implements OnInit {
 
     this.pollDataService.editPoll(this.pollId, editedPoll)
       .then(result => {
-        alert("Enquete atualizada com sucesso");
-
+        this.toastr.success("Enquete atualizada com sucesso");
         this.router.navigate(['/poll', this.pollId]);
-
       }).catch(error => {
-        alert("Oops, houve um erro ao tentar atualizar a enquete!")
+        this.toastr.error("Oops, houve um erro ao tentar atualizar a enquete!")
         console.log(error);
       });
   }

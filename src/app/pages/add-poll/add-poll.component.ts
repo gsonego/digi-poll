@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
@@ -28,7 +29,8 @@ export class AddPollComponent implements OnInit {
     private pollDataService: PollDataService,
     private storage: AngularFireStorage,
     private router: Router,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private toastr: ToastrService) {
 
     this.authService.auth.user.subscribe(user => {
       if (user) {
@@ -102,11 +104,10 @@ export class AddPollComponent implements OnInit {
 
     this.pollDataService.addPoll(newPoll)
       .then(result => {
-        alert('Enquete criada com sucesso!');
-
+        this.toastr.success("Enquete criada com sucesso");
         this.router.navigate(['/poll', result.id]);
       }).catch(error => {
-        alert('Oops, houve um erro ao tentar criar nova enquete.');
+        this.toastr.error('Oops, houve um erro ao tentar criar nova enquete.');
         console.log(error);
       });    
   }

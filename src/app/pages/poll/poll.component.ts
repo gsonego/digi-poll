@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth-service';
+
+import { ToastrService } from 'ngx-toastr';
 import { PollDataService } from '../../services/poll-data-service';
 
 @Component({
@@ -21,7 +23,8 @@ export class PollComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private pollDataService: PollDataService) {
+    private pollDataService: PollDataService,
+    private toastr: ToastrService) {
 
       this.authService.auth.user.subscribe(user => {
         if (user) {
@@ -103,9 +106,9 @@ export class PollComponent implements OnInit {
 
     this.pollDataService.editPoll(this.pollId, editedPoll)
       .then(result => {
-        console.log("Enquete atualizada com sucesso");
+        this.toastr.success("Enquete atualizada com sucesso");
       }).catch(error => {
-        alert("Oops, houve um erro ao tentar atualizar a enquete!")
+        this.toastr.error("Oops, houve um erro ao tentar atualizar a enquete!");
         console.log(error);
       });
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 
 import { AuthService } from '../../services/auth-service';
@@ -16,7 +17,8 @@ export class MyPollsComponent implements OnInit {
 
   constructor(private pollDataService: PollDataService,
     private authService: AuthService,
-    private router: Router) {
+    private router: Router,
+    private toastr: ToastrService) {
 
     this.authService.auth.user.subscribe(user => {
       if (user) {
@@ -41,12 +43,10 @@ export class MyPollsComponent implements OnInit {
     this.pollDataService
       .deletePoll(pollId)
       .then(result => {
-        const msg = `Enquete ${pollId} excluída com sucesso!`;
-        alert(msg);
-        console.log(msg);
+        this.toastr.success(`Enquete ${pollId} excluída com sucesso!`);
       })
       .catch(error => {
-        alert("Desculpe, houve um erro ao tentar excluir enquete!");
+        this.toastr.error("Desculpe, houve um erro ao tentar excluir enquete!");
         console.error(error);
       });
   }
@@ -62,7 +62,7 @@ export class MyPollsComponent implements OnInit {
         // no feedback needed
       })
       .catch(err => {
-        alert("Desculpe, houve um erro ao tentar ativar a enquete.")
+        this.toastr.error("Desculpe, houve um erro ao tentar ativar a enquete.")
         console.error(err);
       });
   }
