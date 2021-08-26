@@ -1,7 +1,7 @@
 <app-horizontal-banner></app-horizontal-banner>
 
 <div class="poll-wrapper">
-    <div class="poll-action">
+    <div class="poll-action" *ngIf="allowEdit">
         <button class="btn-floating halfway-fab waves-effect green" (click)="onEditPollClick()">
             <i class="material-icons">mode_edit</i>
         </button>

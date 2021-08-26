@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth-service';
 import { PollDataService } from '../../services/poll-data-service';
 
 @Component({
@@ -8,16 +9,25 @@ import { PollDataService } from '../../services/poll-data-service';
   styleUrls: ['./poll.component.scss']
 })
 export class PollComponent implements OnInit {
+  userId: string;
   pollId: string | null;
   poll: any | undefined;
   votationOpen: boolean = false;
   votationClosed: boolean = false;
   optionSelected: number = 0;
+  allowEdit = false;
 
   constructor(
+    private authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private pollDataService: PollDataService) {
+
+      this.authService.auth.user.subscribe(user => {
+        if (user) {
+          this.userId = user.uid;
+        }
+      });      
   }
 
   ngOnInit(): void {
@@ -37,9 +47,12 @@ export class PollComponent implements OnInit {
   processPollData(pollData: any) {
     if (!pollData) return;
 
+    this.allowEdit = (pollData.userId == this.userId);
+
     this.poll = {
       title: pollData.title,
       creation: pollData.creation,
+      userId: pollData.userId,
       votes: pollData.votes,
       imageUrl: pollData.imageUrl,
       options: []
